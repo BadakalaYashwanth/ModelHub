@@ -3,7 +3,7 @@
 
 This project provides a web-based dashboard for visualizing and predicting the stock values of companies listed in the S&P 500 index over time. The dashboard allows users to interactively select countries, companies, and date ranges to explore historical stock data and obtain predictions using multiple machine learning models.
 
-![image alt](https://github.com/BadakalaYashwanth/ModelHub/blob/0492ec3675e011aab713716d87e79277e329a037/wireframe.pdf)
+![image alt](https://github.com/BadakalaYashwanth/ModelHub/blob/165dcf0e4c2cbc7d182604424c9acc01b6cfc421/Image.png)
 
 # Features
 * Interactive Country and Company Selector: Choose a country and a list of companies within that country from the S&P 500 dataset.
