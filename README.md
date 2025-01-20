@@ -16,7 +16,7 @@ This project provides a web-based dashboard for visualizing and predicting the s
 # Technologies Used
 * Taipy: For building the web-based user interface and orchestrating the machine learning pipeline.
 * Plotly: For plotting interactive stock value graphs.
-* Scikit-learn: For implementing Linear Regression and K-Nearest Neighbors algorithms.
+* Scikit-learn: For implementing Linear Regression and K-nearest neighbors algorithms.
 * TensorFlow: For implementing the Recurrent Neural Network (RNN).
 * Pandas: For data manipulation and processing.
 
@@ -62,13 +62,14 @@ The application uses scikit-learn for Linear Regression and KNN models and Tenso
 
 # Running the Application
 * To start the application, run the following command:
-#* taipy run main.py
+# taipy run main.py
 
 This will launch a web server, and you can open the dashboard in your browser. The dashboard allows you to interactively select the country, company, and date range to visualize and predict stock values.
 
 # Future Improvements
-Integrating more advanced models like LSTM or ARIMA for time series forecasting.
-Adding the ability to download the prediction results.
-Adding more data sources for a broader set of companies or markets.
+* Integrating more advanced models like LSTM or ARIMA for time series forecasting.
+* Adding the ability to download the prediction results.
+* Adding more data sources for a broader set of companies or markets.
+
 # Contributing
 Feel free to fork the repository, open issues, or submit pull requests to contribute to this project.
