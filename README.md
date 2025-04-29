@@ -2,6 +2,9 @@
 
 A machine learning–powered web application for predicting future stock prices using historical data. Built with Python, Streamlit, and LSTM neural networks, this app fetches financial data, preprocesses it, trains a sequence model, and visualizes forecasts in an interactive dashboard.
 
+#
+![Image](https://github.com/user-attachments/assets/95319b22-648d-4ba6-aa69-05746d99443d)
+
 ## Features
 
 - **Data Fetching**: Retrieves historical stock data from public APIs.
@@ -9,6 +12,9 @@ A machine learning–powered web application for predicting future stock prices 
 - **LSTM Model**: Uses a pre-trained LSTM to forecast stock prices.
 - **Interactive Dashboard**: Streamlit UI to select symbols, view past trends, and see predictions.
 - **Testing**: Unit tests for data pipeline, model integrity, and end-to-end workflow.
+#
+![Image](https://github.com/user-attachments/assets/9f391de9-b4f4-4090-9990-78b32b227b78)
+
 
 ## Tech Stack & Dependencies
 
