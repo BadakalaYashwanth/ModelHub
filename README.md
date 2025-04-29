@@ -26,6 +26,9 @@ A machine learning–powered web application for predicting future stock prices 
 - yfinance or equivalent API for data  
 - pytest for testing
 
+#
+![Image](https://github.com/user-attachments/assets/b4489f5c-cbfd-40f2-b132-dbacb2edb4bd)
+
 ## Installation
 
 1. **Clone the repository**  
