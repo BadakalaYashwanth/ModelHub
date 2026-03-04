@@ -1,1 +1,45 @@
+# IDE & tools
 .qodo
+.vscode/
+.idea/
+
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+*.egg-info/
+dist/
+build/
+*.egg
+.eggs/
+
+# Virtual environments
+venv/
+.venv/
+env/
+.env/
+
+# Environment variable files
+.env
+*.env
+
+# Streamlit
+.streamlit/secrets.toml
+
+# Jupyter / IPython
+.ipynb_checkpoints/
+*.ipynb
+
+# Data & model files (large binaries — track intentionally only)
+# Uncomment the next line if you do NOT want to track the .h5 model in git
+# lstm_model.h5
+
+# SQLite history database
+history.sqlite
+
+# macOS
+.DS_Store
+
+# Windows
+Thumbs.db
