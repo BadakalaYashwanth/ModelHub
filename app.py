@@ -134,38 +134,47 @@ def predict_stock():
     try:
         # Fetch data based on market
         fetch_func = fetch_indian_stock if market == 'Indian' else fetch_us_stock
-        data = fetch_func(ticker)
-        
+
+        with st.spinner(f"Fetching data for **{ticker}** from Yahoo Finance..."):
+            data = fetch_func(ticker)
+
         if data is None or data.empty:
-            st.error("Failed to fetch data. Try another ticker!")
+            st.error(
+                f"❌ Failed to fetch data for **{ticker}**.\n\n"
+                "**Possible reasons:**\n"
+                "- Yahoo Finance is temporarily rate-limiting this server\n"
+                "- The ticker symbol may be delisted or incorrect\n"
+                "- Try again in 30 seconds, or pick a different stock"
+            )
             return None, None
-        
-        # Ensure consistent column names
-        if 'Adj Close' in data.columns and 'Close' not in data.columns:
-            data['Close'] = data['Adj Close']
-        
+
+        st.success(f"✅ Fetched {len(data)} trading days of data for {ticker}")
+
         processed_data = add_technical_indicators(data)
         X, _, scaler = preprocess_for_lstm(processed_data)
-        
+
         if len(X) == 0:
-            st.error("Not enough data to make predictions")
+            st.error("Not enough historical data to build LSTM sequences (need 60+ trading days).")
             return None, None
-            
+
         # Make predictions
         model = load_lstm_model()
         last_sequence = X[-1].reshape(1, 60, 1)
         predictions = []
-        
+
         for _ in range(days_to_predict):
             pred = model.predict(last_sequence, verbose=0)
             predictions.append(scaler.inverse_transform(pred)[0][0])
             last_sequence = np.roll(last_sequence, -1, axis=1)
             last_sequence[0, -1, 0] = pred[0][0]
-        
+
         return processed_data, predictions
-        
+
     except Exception as e:
-        st.error(f"Prediction failed: {str(e)}")
+        st.error(f"❌ Prediction error: {type(e).__name__}: {str(e)}")
+        with st.expander("🔍 Full error details (for debugging)"):
+            import traceback
+            st.code(traceback.format_exc())
         return None, None
 
 # Main app flow
