@@ -67,6 +67,13 @@ show_rsi = st.sidebar.checkbox("Show RSI", True)
 def load_lstm_model():
     return load_model('lstm_model.h5')
 
+# Cache fetched data for 1 hour to avoid hammering Yahoo Finance
+@st.cache_data(ttl=3600, show_spinner=False)
+def cached_fetch(ticker: str, market: str):
+    """Cached wrapper around data fetchers — avoids repeated API calls."""
+    fetch_func = fetch_indian_stock if market == 'Indian' else fetch_us_stock
+    return fetch_func(ticker)
+
 def create_professional_chart(historical, predictions):
     """Create interactive trading chart with indicators"""
     fig = go.Figure()
@@ -132,11 +139,8 @@ def create_professional_chart(historical, predictions):
 
 def predict_stock():
     try:
-        # Fetch data based on market
-        fetch_func = fetch_indian_stock if market == 'Indian' else fetch_us_stock
-
         with st.spinner(f"Fetching data for **{ticker}** from Yahoo Finance..."):
-            data = fetch_func(ticker)
+            data = cached_fetch(ticker, market)
 
         if data is None or data.empty:
             st.error(
@@ -171,9 +175,9 @@ def predict_stock():
         return processed_data, predictions
 
     except Exception as e:
+        import traceback
         st.error(f"❌ Prediction error: {type(e).__name__}: {str(e)}")
         with st.expander("🔍 Full error details (for debugging)"):
-            import traceback
             st.code(traceback.format_exc())
         return None, None
 
@@ -227,12 +231,11 @@ if st.sidebar.button("Predict"):
 
 # Historical data toggle
 if st.sidebar.checkbox("Show Historical Data"):
-    fetch_func = fetch_indian_stock if market == 'Indian' else fetch_us_stock
-    data = fetch_func(ticker)
+    data = cached_fetch(ticker, market)
     if data is not None:
         st.dataframe(data.tail())
     else:
-        st.error("No data available")
+        st.error("❌ No data available for this ticker")
 
 # Refresh note
 st.sidebar.caption(f"Data as of {datetime.now().strftime('%Y-%m-%d %H:%M')}")
